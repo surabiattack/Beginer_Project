@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <h2>99 Bottles</h2>
+        <p id="results"></p>
+    </body>
+</html> 
+<script>
+    $(function(){
+        var lyric = "";
+        var i = 99;
+        var word = "bottles";
+        
+        while(i != 0){
+            lyric += addLyric(i);
+            i--;
+        }
+
+        $("p").html(lyric);
+    });
+
+    function addLyric(i){
+        var line = "";
+        var p1 = "";
+        var p2 = "";
+        if(i > 1)
+        {
+            line += i + " bottles of beer on the wall, "+ i +" bottles of beer. <br/>";
+            line += "Take one down and pass it around, "+ (--i) +" bottles of beer on the wall. <br/><br/>";
+        }
+        else if(i==0)
+        {
+            line += i + " bottle of beer on the wall, "+ i +" bottle of beer. <br/>";
+            line += "Take one down and pass it around, no more bottles of beer on the wall. <br/><br/>";
+        }
+        else
+        {
+            line += "No more bottles of beer on the wall, no more bottles of beer. <br/>";
+            line += "Go to the store and buy some more, 99 bottles of beer on the wall. <br/><br/>";
+        }
+        
+        return line;
+    }
+</script>
