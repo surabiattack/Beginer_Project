@@ -11,7 +11,6 @@
     $(function(){
         var lyric = "";
         var i = 99;
-        var word = "bottles";
         
         while(i != 0){
             lyric += addLyric(i);
@@ -23,21 +22,16 @@
 
     function addLyric(i){
         var line = "";
-        var p1 = "";
-        var p2 = "";
         if(i > 1)
         {
             line += i + " bottles of beer on the wall, "+ i +" bottles of beer. <br/>";
-            line += "Take one down and pass it around, "+ (--i) +" bottles of beer on the wall. <br/><br/>";
-        }
-        else if(i==0)
-        {
-            line += i + " bottle of beer on the wall, "+ i +" bottle of beer. <br/>";
-            line += "Take one down and pass it around, no more bottles of beer on the wall. <br/><br/>";
+            line += "Take one down and pass it around, "+ (--i) +" "+(i==1?"bottle":"bottles")+" of beer on the wall. <br/><br/>";
         }
         else
         {
-            line += "No more bottles of beer on the wall, no more bottles of beer. <br/>";
+            line += i + " bottle of beer on the wall, "+ i +" bottle of beer. <br/>";
+            line += "Take one down and pass it around, no more bottles of beer on the wall. <br/><br/>";
+			line += "No more bottles of beer on the wall, no more bottles of beer. <br/>";
             line += "Go to the store and buy some more, 99 bottles of beer on the wall. <br/><br/>";
         }
         
