@@ -1,0 +1,60 @@
+<html>
+    <head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <h2>Pythagorean Triples Checker</h2>
+		<form>
+			<div class="form-group">
+				<label>Side A</label><input type="text" id="side-a"/>
+			</div>
+			<div class="form-group">
+				<label>Side B</label><input type="text" id="side-b"/>
+			</div>
+			<div class="form-group">
+				<label>Side C</label><input type="text" id="side-c"/>
+			</div>
+		</form>
+		<div>
+			<button type="button" id="check">Check</button>
+		</div>
+		<br>
+		<label id="answer"></label>
+    </body>
+	
+	
+</html> 
+<!-- Modal -->
+<div class="modal fade" id="loadingModal" role="dialog">
+	<div class="modal-dialog modal-sm" style="width:170px">
+
+	  <!-- Modal content-->
+	  <div class="modal-content">
+		<div class="modal-body">
+		  <progress/>
+		</div>
+	  </div>
+	  
+	</div>
+</div>
+<script>
+    $(function(){
+        $("#check").click(function(){
+			$("#loadingModal").modal();
+			var a = parseInt($("#side-a").val());
+			var b = parseInt($("#side-b").val());
+			var c = parseInt($("#side-c").val());
+			
+			setTimeout(function(){
+				if(Math.pow(a, 2) + Math.pow(b, 2) == Math.pow(c, 2))
+					$("#answer").html("Yes, this number are Pythagorean Triples");
+				else
+					$("#answer").html("No, this number aren't Pythagorean Triples");
+				$("#loadingModal").modal('hide');
+			}, 1000);
+			
+		});
+    });
+</script>
