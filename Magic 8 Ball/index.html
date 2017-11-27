@@ -1,0 +1,52 @@
+<html>
+    <head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <h2>Magic 8 Ball</h2>
+		<div>
+			<label>Ask a question</label>
+			<input type="text" id="question"/>
+			<button type="button" id="ask-question">Ask</button>
+		</div>
+		<br>
+		<label id="answer"></label>
+    </body>
+	
+	
+</html> 
+<!-- Modal -->
+	<div class="modal fade" id="loadingModal" role="dialog">
+		<div class="modal-dialog modal-sm" style="width:170px">
+
+		  <!-- Modal content-->
+		  <div class="modal-content">
+			<div class="modal-body">
+			  <progress/>
+			</div>
+		  </div>
+		  
+		</div>
+	</div>
+<script>
+    $(function(){
+        var responses = ["Yes I believe so", "No I don't think so", "Anything is possible", "If you truely believe so, it will become true",
+		"Only on Tuesdays", "Please ask later when I feel like answering", "No",
+		"Yes", "What would your mother say?", "Please consult the Magic 9 Ball about this matter, I'm not qualified enough",
+		"Does a turtle have a shell?", "Does an ant have muscles?", "I think so",
+		"Yeah, I'm sure of it", "No, it will never happen", "Reconsider your life choices",
+		"Do I look like a miracle worker?", "Impossible", "Never say never - 'Justin Beiber'",
+		"I think Google is better qualified on this matter"];
+		
+		$("#ask-question").click(function(){
+			$("#loadingModal").modal();
+			
+			var randNumber = Math.floor((Math.random() * 20) + 1);
+			$("#answer").html(responses[randNumber]);
+			
+			$("#loadingModal").modal('hide');
+		});
+    });
+</script>
