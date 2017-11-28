@@ -1,0 +1,88 @@
+<html>
+    <head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <h2>Rock Paper Scissors Game</h2>
+		<form>
+			<div class="form-group">
+				<label>Choose</label>
+				<select id="choose">
+					<option value="rock">Rock</option>
+					<option value="paper">Paper</option>
+					<option value="scissor">Scissors</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<button type="button" id="send">Send</button>
+			</div>
+		</form>
+		
+		<br>
+		<label id="answer"></label>
+		
+		<h2>Current Score</h2>
+		<p id="current-score"></p>
+    </body>
+</html>
+<script>
+    $(function(){
+		var listChoose = ["rock","paper","scissor"];
+		var score = {computer : 0, player : 0};
+		
+        $("#send").click(function(){
+			var playerChoice = $("#choose").val();
+			var computerChoice = computerChoose();
+			
+			var champion = whoWin(playerChoice, computerChoice);
+			if(champion == 0)
+			{
+				score.computer++;
+				$("#answer").html("Computer win");
+				
+			}
+			else if(champion == 1)
+			{
+				score.player++;
+				$("#answer").html("Player win");
+			}
+			else
+			{
+				$("#answer").html("Draw");
+			}
+			
+			$("#current-score").html("player = " + score.player + " , computer = " + score.computer + "");
+		});
+		
+		function computerChoose(){
+			var randNumber = Math.floor((Math.random() * 2) + 1);
+			return listChoose[randNumber];
+		}
+		
+		/*
+		* 0 = computer win
+		* 1 = player win
+		* 2 = draw
+		*/
+		function whoWin(player, computer){
+			if((player== "rock" && computer == "paper")
+				|| (player== "paper" && computer == "scissor")
+				|| (player == "scissor" &&  computer == "rock"))
+			{
+				return 0;
+			}
+			else if((computer== "rock" && player == "paper")
+					|| (computer== "paper" && player == "scissor")
+					|| (computer == "scissor" &&  player == "rock"))
+			{
+				return 1;
+			}
+			else
+			{
+				return 2;
+			}
+		}
+    });
+</script>
