@@ -1,0 +1,137 @@
+<html>
+    <head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <h2>Coin Estimator By Weight</h2>
+		<form>
+			<div class="table-responsive">          
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>Pennies</td><td><input type="text" id="weight-pennies"/></td>
+							<td>Nickels</td><td><input type="text" id="weight-nickels"/></td>
+							<td>Dimes</td><td><input type="text" id="weight-dimes"/></td>
+							<td>Quarters</td><td><input type="text" id="weight-quarters"/></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="form-group">
+				<label>Weight</label>
+				<select id="choose">
+					<option value="g">Grams</option>
+					<option value="p">Pounds</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<button type="button" id="submit">Submit</button>
+			</div>
+		</form>
+		
+		<br>
+		
+		<div class="table-responsive">          
+			<table class="table" id="table-result" style="width:30%">
+				<tbody>
+					<tr>
+						<td>Coin wrapper</td><td><label id="result-coin" /></td>
+						
+					</tr>
+					<tr>
+						<td>Estimated total of money</td><td><label id="result-estimated" /></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+    </body>
+</html>
+<script>
+    $(function(){
+		var pennies =
+		{
+			massGram: 2.50,
+			massPound: 0.00551156,
+			wrapperCapacity: 50,
+			totalValuePerWrapper: 0.5,
+			wrappers:0,
+			numberOfCoins:0,
+			totalValue:0,
+			totalWeight:0
+		};
+		
+		var nickels =
+		{
+			massGram: 5,
+			massPound: 0.0110231,
+			wrapperCapacity: 40,
+			totalValuePerWrapper: 2,
+			wrappers:0,
+			numberOfCoins:0,
+			totalValue:0,
+			totalWeight:0
+		};
+		
+		var dimes =
+		{
+			massGram: 2.268,
+			massPound: 0.0050000841,
+			wrapperCapacity: 50,
+			totalValuePerWrapper: 5,
+			wrappers:0,
+			numberOfCoins:0,
+			totalValue:0,
+			totalWeight:0
+		};
+		
+		var quarters =
+		{
+			massGram: 5.67,
+			massPound: 0.01250021,
+			wrapperCapacity: 40,
+			totalValuePerWrapper: 10,
+			wrappers:0,
+			numberOfCoins:0,
+			totalValue:0,
+			totalWeight:0
+		};
+				
+		$("#submit").click(function(){
+			var weightChoose = $("#choose").val();
+			
+			pennies.totalWeight = parseFloat(!$("#weight-pennies").val()?0:$("#weight-pennies").val());
+			nickels.totalWeight = parseFloat(!$("#weight-nickels").val()?0:$("#weight-nickels").val());
+			dimes.totalWeight = parseFloat(!$("#weight-dimes").val()?0:$("#weight-dimes").val());
+			quarters.totalWeight = parseFloat(!$("#weight-quarters").val()?0:$("#weight-quarters").val());
+			
+			pennies.wrappers = Math.round(pennies.totalWeight / weight(pennies, weightChoose));
+			nickels.wrappers = Math.round(nickels.totalWeight / weight(nickels, weightChoose));
+			dimes.wrappers = Math.round(dimes.totalWeight / weight(dimes, weightChoose));
+			quarters.wrappers = Math.round(quarters.totalWeight / weight(quarters, weightChoose));
+			
+			pennies.totalValue = pennies.wrappers * pennies.totalValuePerWrapper;
+			nickels.totalValue = nickels.wrappers * nickels.totalValuePerWrapper;
+			dimes.totalValue = dimes.wrappers * dimes.totalValuePerWrapper;
+			quarters.totalValue = quarters.wrappers * quarters.totalValuePerWrapper;
+			
+			$("#result-coin").html("<li>Pennies : "+pennies.wrappers+"</li>"
+								   +"<li>Nickels : "+nickels.wrappers+"</li>"
+                                   +"<li>Dimes : "+dimes.wrappers+"</li>"
+                                   +"<li>Quarters : "+quarters.wrappers+"</li>");
+            $("#result-estimated").html("<li>Pennies : "+pennies.totalValue+"</li>"
+                                   +"<li>Nickels : "+nickels.totalValue+"</li>"
+                                   +"<li>Dimes : "+dimes.totalValue+"</li>"
+                                   +"<li>Quarters : "+quarters.totalValue+"</li>");
+		});
+		
+		function weight(coin, units)
+		{
+			if(units == 'g')
+				return coin.massGram;
+			else
+				return coin.massPound;
+		}
+    });
+</script>
